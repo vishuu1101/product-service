@@ -1,17 +1,23 @@
 import pika
 from fastapi import HTTPException
+import pika.credentials
 from config import load_config
 
 config = load_config()
 
 # Load RabbitMQ details from the configuration
 rabbitmq_host = config['rabbitmq_host']
+rabbitmq_username = config['rabbitmq_username']
+rabbitmq_password = config['rabbitmq_password']
+rabbitmq_virtualhost = config['rabbitmq_virtualhost']
 exchange_name = config['exchange_name']
 
 def publish_to_rabbitmq(message: str, routing_key: str):
     try:
         # Establish RabbitMQ connection
-        connection = pika.BlockingConnection(pika.ConnectionParameters(host=rabbitmq_host))
+        connection = pika.BlockingConnection(pika.ConnectionParameters(host=rabbitmq_host,
+                                                                        credentials=pika.PlainCredentials(rabbitmq_username, rabbitmq_password),
+                                                                        virtual_host=rabbitmq_virtualhost))
         channel = connection.channel()
 
         # Declare exchange and queue

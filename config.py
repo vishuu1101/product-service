@@ -15,10 +15,16 @@ def load_config():
         # Load RabbitMQ details from the configuration
         rabbitmq_host = config['RabbitMQ']['host']
         exchange_name = config['RabbitMQ']['exchange_name']
+        username = config['RabbitMQ']['username']
+        password = config['RabbitMQ']['password']
+        virtualHost = config.get('RabbitMQ', 'virtualhost', fallback='/')
 
         return {
             "rabbitmq_host": rabbitmq_host,
-            "exchange_name": exchange_name
+            "rabbitmq_username": username,
+            "rabbitmq_password": password,
+            "exchange_name": exchange_name,
+            "rabbitmq_virtualhost": virtualHost
         }
 
     except Exception as e:
