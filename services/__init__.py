@@ -1,1 +1,1 @@
-from .add_product_service import ProductService
+from .product_service import ProductService

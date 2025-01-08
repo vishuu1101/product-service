@@ -1,6 +1,9 @@
 from dto import AddProductRequest, AddProductResponse, MessageDTO
 from rabbitmq import publish_to_rabbitmq
 from util.text_util import encode_text
+from fastapi import Depends
+import requests
+
 
 class ProductService:
 
@@ -15,3 +18,7 @@ class ProductService:
         messageDTO = MessageDTO(pattern='product-info.vector-embed.successful', data=response.model_dump_json())
         publish_to_rabbitmq(messageDTO.model_dump_json(), 'product-info.vector-embed.successful')
         return response
+    
+    def get_vector_for_text(self, search_text: str):
+        embedData = encode_text(search_text)
+        return embedData

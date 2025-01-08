@@ -8,6 +8,7 @@ def encode_text(text: str):
     try:
         print("Encoding text...")
         embedding = model.encode(text)
+        print("Encoding completed...")
         return embedding
     except Exception as e:
         print(f"Error encoding text: {e}")

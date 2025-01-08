@@ -1,3 +1,5 @@
 from .add_product_request import AddProductRequest
 from .add_product_response import AddProductResponse
 from .rabbitmq_message_dto import MessageDTO
+from .get_vector_request import GetVectorRequest
+from .get_vector_response import GetVectorResponse
