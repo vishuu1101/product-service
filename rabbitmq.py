@@ -25,8 +25,7 @@ def publish_to_rabbitmq(message: str, routing_key: str):
 
         # Publish message to RabbitMQ
         channel.basic_publish(exchange=exchange_name, routing_key=routing_key, body=message)
-        print(f"Message sent: '{message}' with routing key: '{routing_key}'")
-
+        
         # Close the connection
         connection.close()
     except Exception as e:

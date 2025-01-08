@@ -15,4 +15,4 @@ class ProductRoutes:
 product_routes = ProductRoutes()
 
 # Register the route with the router manually
-router.add_api_route("/add-product/", product_routes.add_product, methods=["POST"])
+router.add_api_route("/add", product_routes.add_product, methods=["POST"])

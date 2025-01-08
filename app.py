@@ -9,7 +9,7 @@ class AppInitializer:
         """
         Register routes with FastAPI app.
         """
-        self.app.include_router(product_router)
+        self.app.include_router(product_router, prefix='/v1/product', tags=["product"])
 
     def get_app(self):
         """

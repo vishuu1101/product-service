@@ -1,10 +1,17 @@
 from dto import AddProductRequest, AddProductResponse, MessageDTO
 from rabbitmq import publish_to_rabbitmq
+from util.text_util import encode_text
 
 class ProductService:
 
     def add_product(self, addProductRequest: AddProductRequest) -> AddProductResponse:
-        response = AddProductResponse(name=addProductRequest.name)
+        embedData = encode_text(addProductRequest.searchText)
+        response = AddProductResponse(name=addProductRequest.name,
+                                      desc=addProductRequest.desc,
+                                      searchText=addProductRequest.searchText,
+                                      category=addProductRequest.category,
+                                      price=addProductRequest.price,
+                                       embedding=embedData)
         messageDTO = MessageDTO(pattern='product-info.vector-embed.successful', data=response.model_dump_json())
         publish_to_rabbitmq(messageDTO.model_dump_json(), 'product-info.vector-embed.successful')
         return response
