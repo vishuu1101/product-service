@@ -3,7 +3,8 @@ from pydantic import BaseModel
 
 class AddProductResponse(BaseModel):
     name: str
-    desc: str
+    pvid: str
+    pmid: str
     searchText: str
     category: str
     price: float

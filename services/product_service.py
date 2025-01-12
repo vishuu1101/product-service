@@ -10,7 +10,8 @@ class ProductService:
     def add_product(self, addProductRequest: AddProductRequest) -> AddProductResponse:
         embedData = encode_text(addProductRequest.searchText)
         response = AddProductResponse(name=addProductRequest.name,
-                                      desc=addProductRequest.desc,
+                                      pvid=addProductRequest.pvid,
+                                      pmid=addProductRequest.pmid,
                                       searchText=addProductRequest.searchText,
                                       category=addProductRequest.category,
                                       price=addProductRequest.price,
